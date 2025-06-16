@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Server.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="TicTacToeForm.cs" />
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+
+</Project>
