@@ -1,2 +1,11 @@
-bin
-obj
+# Ignore build directories
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
