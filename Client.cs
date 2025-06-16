@@ -3,11 +3,10 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-class Client
+public class Client
 {
     private TcpClient client;
     private NetworkStream stream;
-
     public event Action<string> OnUpdateReceived;
 
     public Client(string serverIp, int port)
@@ -29,20 +28,17 @@ class Client
         Thread listeningThread = new Thread(() =>
         {
             var buffer = new byte[1024];
-            while (true)
+            try
             {
-                try
+                while (true)
                 {
                     int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                    if (bytesRead <= 0) break;
                     string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                     OnUpdateReceived?.Invoke(message);
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error: {ex.Message}");
-                    break;
-                }
             }
+            catch { }
         });
         listeningThread.IsBackground = true;
         listeningThread.Start();
@@ -50,7 +46,7 @@ class Client
 
     public void Close()
     {
-        stream.Close();
-        client.Close();
+        stream?.Close();
+        client?.Close();
     }
 }

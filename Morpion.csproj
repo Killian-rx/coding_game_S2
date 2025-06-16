@@ -10,8 +10,15 @@
   <ItemGroup>
     <Compile Include="Server.cs" />
     <Compile Include="Client.cs" />
-    <Compile Include="TicTacToeForm.cs" />
+    <Compile Include="Client1.cs" />
+    <Compile Include="Client2.cs" />
     <Compile Include="Program.cs" />
+    <None Include="cross.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="circle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

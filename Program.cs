@@ -2,36 +2,49 @@ using System;
 using System.Threading;
 using System.Windows.Forms;
 
-class Program
+static class Program
 {
     [STAThread]
-    static void Main(string[] args)
+    static void Main()
     {
-        Thread serverThread = new Thread(() =>
+        try
         {
-            Server server = new Server(5000);
-            server.Start();
-        });
+            // Démarrer le serveur en arrière-plan
+            var serverThread = new Thread(() =>
+            {
+                var server = new Server(5000);
+                server.Start();
+            })
+            { IsBackground = true };
+            serverThread.Start();
 
-        Thread client1Thread = new Thread(() =>
+            // Démarrer Client1Form dans un thread STA
+            var client1Thread = new Thread(() =>
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Client1Form());
+            });
+            client1Thread.SetApartmentState(ApartmentState.STA);
+            client1Thread.Start();
+
+            // Démarrer Client2Form dans un thread STA
+            var client2Thread = new Thread(() =>
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Client2Form());
+            });
+            client2Thread.SetApartmentState(ApartmentState.STA);
+            client2Thread.Start();
+
+            // Attendre que les threads se terminent
+            client1Thread.Join();
+            client2Thread.Join();
+        }
+        catch (Exception ex)
         {
-            Application.EnableVisualStyles();
-            Application.Run(new TicTacToeForm());
-        });
-
-        Thread client2Thread = new Thread(() =>
-        {
-            Application.EnableVisualStyles();
-            Application.Run(new TicTacToeForm());
-        });
-
-        serverThread.Start();
-        Thread.Sleep(1000); // Assure que le serveur démarre avant les clients
-        client1Thread.Start();
-        client2Thread.Start();
-
-        serverThread.Join();
-        client1Thread.Join();
-        client2Thread.Join();
+            Console.WriteLine($"Une erreur s'est produite : {ex.Message}");
+        }
     }
 }

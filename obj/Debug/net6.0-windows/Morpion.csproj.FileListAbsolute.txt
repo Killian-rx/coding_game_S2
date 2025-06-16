@@ -1,3 +1,5 @@
+C:\Users\killi\Documents\Coding Game\coding_game_S2\bin\Debug\net6.0-windows\cross.png
+C:\Users\killi\Documents\Coding Game\coding_game_S2\bin\Debug\net6.0-windows\circle.png
 C:\Users\killi\Documents\Coding Game\coding_game_S2\bin\Debug\net6.0-windows\Morpion.exe
 C:\Users\killi\Documents\Coding Game\coding_game_S2\bin\Debug\net6.0-windows\Morpion.deps.json
 C:\Users\killi\Documents\Coding Game\coding_game_S2\bin\Debug\net6.0-windows\Morpion.runtimeconfig.json
