@@ -17,22 +17,11 @@ class Client
         StartListening();
     }
 
-    public string SendMove(int x, int y)
+    public void SendMove(int x, int y)
     {
-        try
-        {
-            string message = $"MOVE {x} {y}";
-            byte[] data = Encoding.UTF8.GetBytes(message);
-            stream.Write(data, 0, data.Length);
-
-            var buffer = new byte[1024];
-            int bytesRead = stream.Read(buffer, 0, buffer.Length);
-            return Encoding.UTF8.GetString(buffer, 0, bytesRead);
-        }
-        catch (Exception ex)
-        {
-            return $"ERROR: {ex.Message}";
-        }
+        string message = $"MOVE {x} {y}";
+        byte[] data = Encoding.UTF8.GetBytes(message);
+        stream.Write(data, 0, data.Length);
     }
 
     private void StartListening()

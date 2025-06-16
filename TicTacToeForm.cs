@@ -22,16 +22,19 @@ public class TicTacToeForm : Form
         {
             for (int j = 0; j < 3; j++)
             {
-                buttons[i, j] = new Button
+                int xi = i;  int yj = j; 
+                buttons[xi, yj] = new Button
                 {
                     Text = "",
                     Width = 80,
                     Height = 80,
-                    Top = i * 80,
-                    Left = j * 80
+                    Top = xi * 80,
+                    Left = yj * 80,
+                    Font = new Font(FontFamily.GenericSansSerif, 32, FontStyle.Bold),
+                    TextAlign = ContentAlignment.MiddleCenter
                 };
-                buttons[i, j].Click += (sender, e) => OnButtonClick(i, j);
-                this.Controls.Add(buttons[i, j]);
+                buttons[xi, yj].Click += (sender, e) => OnButtonClick(xi, yj);
+                this.Controls.Add(buttons[xi, yj]);
             }
         }
     }
@@ -40,11 +43,8 @@ public class TicTacToeForm : Form
     {
         try
         {
-            string response = client.SendMove(x, y);
-            if (response == "INVALID")
-            {
-                MessageBox.Show("Invalid move!");
-            }
+            client.SendMove(x, y);
+            buttons[x, y].Enabled = false;  // désactive pour éviter un 2ᵉ clic
         }
         catch (Exception ex)
         {
